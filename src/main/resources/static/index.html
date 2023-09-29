@@ -1,0 +1,68 @@
+<html>
+    <head>
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+              integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+              crossorigin=""/>
+    </head>
+    <style>
+        #map {
+            height: 480px;
+            width: 100%;
+        }
+        .container{
+            width:80%;
+            margin:auto;
+        }
+    </style>
+    <body>
+        <div class="container">
+
+            <h1>TEST</h1>
+
+            <div id="map"></div>
+
+            <form id="form">
+
+                Lat:<input id="lat"></input> <br />
+                Long:<input id="long"></input> <br />
+                <input type="submit" id="addmarker">
+            </form>
+
+        </div>
+
+
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+                integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+                crossorigin=""></script>
+        <script>
+            var map = L.map('map').setView([51.505, -0.09], 3);
+
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+
+            // add markers
+            var marker = L.marker([51.5, -0.09]).addTo(map);
+
+
+            function onMapClick(e) {
+                document.getElementById("lat").value = e.latlng.lat;
+                document.getElementById("long").value = e.latlng.lng;
+
+<!--                alert("You clicked the map at " + e.latlng);-->
+            }
+
+            document.getElementById("form").addEventListener('submit', (e) =>{
+                alert("here");
+                e.preventDefault();
+
+            });
+
+            map.on('click', onMapClick);
+
+
+        </script>
+    </body>
+</html>
